@@ -22,31 +22,12 @@ public interface TaskListener {
 	//void taskIsCanceled(TaskType type);
 }
 
-mTaskListener.taskFinished(mTaskType, response.body(), false);
+mTaskListener.taskFinished(mTaskType, result, false);
 ```
 
 **直接在基类中实现该接口**
 ```
 public class BaseActivity extends Activity implements TaskListener{
-
-    /**
-     * 父容器， 带自定义顶部bar或者toolbar
-     */
-    protected LinearLayout mMainLayout;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mMainLayout = (LinearLayout) View.inflate(this, R.layout.activity_base, null);
-        setContentView(mMainLayout);
-    }
-
-    @Override
-    public void setContentView(int id){
-        if(mMainLayout != null){
-            mMainLayout.addView(View.inflate(this, id, null), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        }
-    }
 
     @Override
     public void taskFinished(TaskType type, Object result, boolean isHistory) {
@@ -91,6 +72,28 @@ public class BaseActivity extends Activity implements TaskListener{
                 TaskParamsManager.getInstance().getDescParams(0));
     }
 ```
+**添加接口和参数**
+需要改动两个类 
+1、com.network.TaskType 新增一个接口名定义
+```
+public enum TaskType {
+    TaskType_Version,
+    TaskType_Homepage,
+    TaskType_Desc,
+}
+```
+2、com.network.TaskParamsManager 新增
+```
+public HashMap<String, Object> getVersionParams(){
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("TaskType", TaskType.TaskType_Version);
+       // params.put("TaskMethod", "app/version");
+        params.put("TaskMethod", "getVersion");
+        params.put("RequestType", RequestType.GET);
+
+        return params;
+    }
+```
 
 **为方便测试，本地新建一个服务**
 ```
@@ -128,32 +131,4 @@ public class DataController {
     }
 
 }
-```
-
-**添加接口和参数**
-需要改动两个类 
-1、com.network.TaskType 新增一个接口名定义
-```
-public enum TaskType {
-    TaskType_Version,
-    TaskType_Homepage,
-    TaskType_Desc,
-}
-```
-2、com.network.TaskParamsManager 新增
-```
-/**
-     * Get
-     * 读取版本信息
-     * @return
-     */
-    public HashMap<String, Object> getVersionParams(){
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("TaskType", TaskType.TaskType_Version);
-       // params.put("TaskMethod", "app/version");
-        params.put("TaskMethod", "getVersion");
-        params.put("RequestType", RequestType.GET);
-
-        return params;
-    }
 ```
