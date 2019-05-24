@@ -21,6 +21,8 @@ public interface TaskListener {
 	void taskFinished(TaskType type, Object result, boolean isHistory);
 	//void taskIsCanceled(TaskType type);
 }
+
+mTaskListener.taskFinished(mTaskType, response.body(), false);
 ```
 
 **直接在基类中实现该接口**
