@@ -120,3 +120,31 @@ public class DataController {
 
 }
 ```
+
+**添加接口和参数**
+需要改动两个类 
+1、com.network.TaskType 新增一个接口名定义
+```
+public enum TaskType {
+    TaskType_Version,
+    TaskType_Homepage,
+    TaskType_Desc,
+}
+```
+2、com.network.TaskParamsManager 新增
+```
+/**
+     * Get
+     * 读取版本信息
+     * @return
+     */
+    public HashMap<String, Object> getVersionParams(){
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("TaskType", TaskType.TaskType_Version);
+       // params.put("TaskMethod", "app/version");
+        params.put("TaskMethod", "getVersion");
+        params.put("RequestType", RequestType.GET);
+
+        return params;
+    }
+```
