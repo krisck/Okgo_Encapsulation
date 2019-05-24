@@ -2,9 +2,11 @@
 **记录一下自己习惯使用的网络请求模式，用okgo封装了一下**
 
 **主要使用类**
+```
 OkgoTask ：服务器地址，请求任务
 TaskParamsManager ： 请求参数封装
 TaskType ： 请求接口名枚举
+```
 
 **项目使用Okgo作为网络请求框架， 定义一个TaskListener作为请求结果回调接口**
 ```
