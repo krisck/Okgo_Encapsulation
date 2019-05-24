@@ -22,8 +22,10 @@ public interface TaskListener {
 	//void taskIsCanceled(TaskType type);
 }
 
+//OkgoTask中使用回调
 mTaskListener.taskFinished(mTaskType, result, false);
 
+//子activity中
 @Override
     public void taskFinishedCustom(TaskType type, Object result, boolean isHistory) {
         super.taskFinishedCustom(type, result, isHistory);
@@ -113,42 +115,4 @@ public HashMap<String, Object> getVersionParams(){
 
         return params;
     }
-```
-
-**为方便测试，本地新建一个服务**
-```
-@RestController
-public class DataController {
-
-    //test okgo demo
-    @RequestMapping(value = "api/getVersion")
-    public ResultEntity getMethod() {
-        ResultEntity result = new ResultEntity();
-        result.setStatusCode(200);
-        result.setMessage("get == 版本获取成功");
-        return result;
-    }
-
-    @RequestMapping(value = "api/homepage")
-    public ResultEntity postMethod(int PageNo, int PageSize) {
-        ResultEntity result = new ResultEntity();
-        result.setStatusCode(200);
-        result.setMessage("post homepage == 获取成功");
-        return result;
-    }
-
-    @RequestMapping(value = "api/desc")
-    public ResultEntity postJsonMethod(@RequestBody TestOkgoEntity entity) {
-        ResultEntity result = new ResultEntity();
-        if (entity == null) {
-            result.setStatusCode(10001);
-            result.setMessage("参数错误");
-            return result;
-        }
-        result.setStatusCode(200);
-        result.setMessage("postJson desc == 获取成功");
-        return result;
-    }
-
-}
 ```
