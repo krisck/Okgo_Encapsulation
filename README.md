@@ -1,7 +1,7 @@
 # NetFrameWork_Okgo
 记录一下自己习惯使用的网络请求模式，用okgo封装了一下
 
-**项目使用Okgo作为网络请求框架， 定义一个TaskListener作为请求结果回调接口
+**项目使用Okgo作为网络请求框架， 定义一个TaskListener作为请求结果回调接口**
 ```
 /**
  * 网络访问结果回调接口
@@ -16,7 +16,7 @@ public interface TaskListener {
 }
 ```
 
-**直接在基类中实现该接口
+**直接在基类中实现该接口**
 ```
 public class BaseActivity extends Activity implements TaskListener{
 
@@ -62,7 +62,7 @@ public class BaseActivity extends Activity implements TaskListener{
 }
 ```
 
-**在需要访问服务器的地方启动任务
+**在需要访问服务器的地方启动任务**
 ```
 //get
     public void onGetMethod(View v){
@@ -83,7 +83,7 @@ public class BaseActivity extends Activity implements TaskListener{
     }
 ```
 
-**为方便测试，本地新建一个服务
+**为方便测试，本地新建一个服务**
 ```
 @RestController
 public class DataController {
