@@ -23,6 +23,26 @@ public interface TaskListener {
 }
 
 mTaskListener.taskFinished(mTaskType, result, false);
+
+@Override
+    public void taskFinishedCustom(TaskType type, Object result, boolean isHistory) {
+        super.taskFinishedCustom(type, result, isHistory);
+        if(result == null){
+            return;
+        }
+        if(result instanceof Error){
+            //TODO:
+            return;
+        }
+        switch (type){
+            case TaskType_Version:
+                break;
+            case TaskType_Homepage:
+                break;
+            case TaskType_Desc:
+                break;
+        }
+    }
 ```
 
 **直接在基类中实现该接口**
