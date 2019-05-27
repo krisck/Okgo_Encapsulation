@@ -1,4 +1,4 @@
-# Okgo Demo
+# Okgo_Encapsulation
 **记录一下自己习惯使用的网络请求模式，用okgo封装了一下 FYI**
 
 **主要使用类**
