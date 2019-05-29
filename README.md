@@ -1,5 +1,5 @@
-# NetFrameWork_Okgo
-**记录一下自己习惯使用的网络请求模式，用okgo封装了一下**
+# Okgo_Encapsulation
+**记录一下自己习惯使用的网络请求模式，用okgo封装了一下 FYI**
 
 **主要使用类**
 ```
@@ -27,8 +27,8 @@ mTaskListener.taskFinished(mTaskType, result, false);
 
 //子activity中
 @Override
-    public void taskFinishedCustom(TaskType type, Object result, boolean isHistory) {
-        super.taskFinishedCustom(type, result, isHistory);
+    public void taskFinished(TaskType type, Object result, boolean isHistory) {
+        super.taskFinished(type, result, isHistory);
         if(result == null){
             return;
         }
@@ -53,23 +53,7 @@ public class BaseActivity extends Activity implements TaskListener{
 
     @Override
     public void taskFinished(TaskType type, Object result, boolean isHistory) {
-        /**
-         * 返回Exception暂定义为token invalid，需重新登录,
-         * 其他异常定义为Error返回
-         * error或者正常返回不截获，通过taskFinishedCustom方法响应
-         */
-        if(result != null && result instanceof Exception){
-            //TODO:
-            // kill all activity
-            // go to login page
-            return;
-        }
-
-        taskFinishedCustom(type, result, isHistory);
-    }
-
-    protected void taskFinishedCustom(TaskType type, Object result, boolean isHistory){
-
+        
     }
 }
 ```
