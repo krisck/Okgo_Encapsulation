@@ -85,8 +85,9 @@ public class OkgoTask {
         String url = ServerUrl + params.get("TaskMethod") + getParamsStr(params);
         System.out.println("==**==url==== " + url);
         OkGo.<String>get(url)
-            .cacheKey("kris")
-            .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+            //.cacheKey("kris")
+            //.cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+            .cacheMode(CacheMode.NO_CACHE)
             .execute(mCallBack);
     }
 
@@ -97,8 +98,9 @@ public class OkgoTask {
         String url = ServerUrl + params.get("TaskMethod");
         System.out.println("==**==url==== " + url);
         OkGo.<String>post(url)
-            .cacheKey("kris")
-            .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+           // .cacheKey("kris")
+           // .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+            .cacheMode(CacheMode.NO_CACHE)
             .params(getHttpParams(params))
             .execute(mCallBack);
     }
@@ -111,8 +113,9 @@ public class OkgoTask {
         String url = ServerUrl + params.get("TaskMethod");
         System.out.println("==**==url==== " + url);
         OkGo.<String>post(url)
-            .cacheKey("kris")
-            .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+           // .cacheKey("kris")
+           // .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+            .cacheMode(CacheMode.NO_CACHE)
             .upJson(params.get("json").toString())
             .execute(mCallBack);
     }
