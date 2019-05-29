@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity{
             return;
         }
         if(result instanceof Error){
+            ((TextView) findViewById(R.id.tv_result)).setText(((Error)result).getMessage());
             //TODO:
             return;
         }

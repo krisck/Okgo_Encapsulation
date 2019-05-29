@@ -5,6 +5,7 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.PostRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -127,7 +128,7 @@ public class OkgoTask {
         @Override
         public void onError(Response<String> response) {
             super.onError(response);
-            System.out.println("==response.onError= " + response.body());
+            System.out.println("==response.onError= " + response.getException().getMessage());
             /**
              * 解析json， 判断errorCode或者Msg, 如果token invalid登录失效，封装成Exception返回
              *
@@ -141,7 +142,7 @@ public class OkgoTask {
             }
 
             if(mTaskListener != null){
-                mTaskListener.taskFinished(mTaskType, new Error(response.body()), false);
+                mTaskListener.taskFinished(mTaskType, new Error(response.getException().getMessage()), false);
             }
         }
     };
