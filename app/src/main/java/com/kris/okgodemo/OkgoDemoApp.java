@@ -28,8 +28,8 @@ public class OkgoDemoApp extends Application{
             builder.connectTimeout(20 * 1000, TimeUnit.MILLISECONDS);
 
             OkGo.getInstance().init(this)
-                    .setOkHttpClient(builder.build())
-                    .setCacheMode(CacheMode.NO_CACHE);
+                   // .setCacheMode(CacheMode.NO_CACHE)
+                    .setOkHttpClient(builder.build());
         } catch (Exception e) {
             e.printStackTrace();
         }
