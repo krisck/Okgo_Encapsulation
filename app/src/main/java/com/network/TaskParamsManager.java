@@ -20,11 +20,16 @@ public class TaskParamsManager {
     //分页，每一页最大数20条
     public static final int PageSize = 20;
 
-    public static TaskParamsManager mTaskLinkManager;
+    /**
+     * volatile 防止指令重排
+     * 通过“内存屏障”来防止指令被重排序
+     */
+    private static volatile TaskParamsManager mTaskLinkManager;
 
     public static TaskParamsManager getInstance(){
         if(mTaskLinkManager == null){
             synchronized (TaskParamsManager.class){
+                //synchronized代码块内部虽然会重排序，但不会在代码块的范围内导致线程安全问题
                 if(mTaskLinkManager == null){
                     mTaskLinkManager = new TaskParamsManager();
                 }

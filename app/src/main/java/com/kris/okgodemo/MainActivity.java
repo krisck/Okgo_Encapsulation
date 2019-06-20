@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity{
     public void taskFinishedCustom(TaskType type, Object result, boolean isHistory) {
         super.taskFinishedCustom(type, result, isHistory);
         if(result == null){
+            //TODO:
             return;
         }
         if(result instanceof Error){

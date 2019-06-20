@@ -23,12 +23,13 @@ public class OkgoDemoApp extends Application{
         //好处是全局参数统一,特定请求可以特别定制参数
         try {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.readTimeout(20 * 1000, TimeUnit.MILLISECONDS);
-            builder.writeTimeout(20 * 1000, TimeUnit.MILLISECONDS);
-            builder.connectTimeout(20 * 1000, TimeUnit.MILLISECONDS);
+            builder.readTimeout(30 * 1000, TimeUnit.MILLISECONDS);
+            builder.writeTimeout(30 * 1000, TimeUnit.MILLISECONDS);
+            builder.connectTimeout(30 * 1000, TimeUnit.MILLISECONDS);
 
             OkGo.getInstance().init(this)
                    // .setCacheMode(CacheMode.NO_CACHE)
+                    .setRetryCount(0)
                     .setOkHttpClient(builder.build());
         } catch (Exception e) {
             e.printStackTrace();

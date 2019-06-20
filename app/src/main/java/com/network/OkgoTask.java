@@ -26,11 +26,15 @@ public class OkgoTask {
      */
     public static final boolean UseTestServer = false;
 
-    public static final String ServerUrl = UseTestServer? "http://192.168.1.90:8081/api/" : "http://192.168.1.90:8081/api/";
+    public static final String ServerUrl = UseTestServer? "http://xxxx:8081/api/" : "http://192.168.1.90:8081/api/";
 
     public static final String UTF8_BOM = "\uFEFF";
 
-    public static OkgoTask mOkgoTask;
+    /**
+     * volatile是一个类型修饰符（type specifier）.volatile的作用是作为指令关键字，确保本条指令不会因编译器的优化而省略，且要求每次直接读值。
+     * volatile的变量是说这变量可能会被意想不到地改变，这样，编译器就不会去假设这个变量的值了。
+     */
+    public static volatile OkgoTask mOkgoTask;
 
     private TaskType mTaskType;
     private TaskListener mTaskListener;
@@ -61,6 +65,10 @@ public class OkgoTask {
         mTaskListener = taskListener;
         if(params == null){
             //TODO:
+            if(mTaskListener != null){
+                mTaskListener.taskFinished(mTaskType, new Error("参数异常"), false);
+                //mTaskListener = null;
+            }
             return;
         }
         switch ((String)params.get("RequestType")){
@@ -95,6 +103,13 @@ public class OkgoTask {
     private void postMode(HashMap<String, Object> params){
         String url = ServerUrl + params.get("TaskMethod");
         System.out.println("==**==url==== " + url);
+
+        // 添加header
+//        PostRequest rq = OkGo.post(url);
+//        rq.params(getHttpParams(params));
+//        //rq.headers("","");
+//        rq.execute(mCallBack);
+
         OkGo.<String>post(url)
             .params(getHttpParams(params))
             .execute(mCallBack);
@@ -144,8 +159,16 @@ public class OkgoTask {
             if(mTaskListener != null){
                 mTaskListener.taskFinished(mTaskType, new Error(response.getException().getMessage()), false);
             }
+            //mTaskListener = null;
         }
     };
+
+    /**
+     * 添加请求头
+     */
+    public void addHeader(){
+
+    }
 
     /**
      * post 的参数需要封装成HttpParams
